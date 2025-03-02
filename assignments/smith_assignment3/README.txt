@@ -1,6 +1,3 @@
-Brent Smith
-bds27724@uga.edu
-
 Program runs with this command, assuming you are in the smith_assignment3 folder:
 
 $ java BinaryTreeDriver.java <input file name>
