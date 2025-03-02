@@ -1,6 +1,3 @@
-Brent Smith
-bds27724@uga.edu
-
 All programs should be compiled already.
 Program runs with this command, assuming you are in the smith_assignment4 folder:
 
