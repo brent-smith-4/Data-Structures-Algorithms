@@ -1,6 +1,3 @@
-Name: Brent Smith
-Email: bds27724@uga.edu
-
 File compiles & runs with standard command given with assignment, assuming you are in smith_assignment2 directory:
 $ javac NodeType.java
 $ javac DoublyLinkedList.java
