@@ -1,0 +1,16 @@
+smith_assignment1:
+total 60
+-rw-r--r--. 1 myid    0 Sep 30 18:51 empty.txt
+-rw-r--r--. 1 myid   17 Sep 30 18:51 input.txt
+-rw-r--r--. 1 myid  494 Oct  2 22:57 ItemType.class
+-rw-r--r--. 1 myid  398 Oct  2 22:55 ItemType.java
+-rw-r--r--. 1 myid 5210 Oct  2 22:57 LinkedListDriver.class
+-rw-r--r--. 1 myid 6871 Oct  2 23:17 LinkedListDriver.java
+-rw-r--r--. 1 myid  246 Oct  2 22:57 NodeType.class
+-rw-r--r--. 1 myid   89 Oct  2 22:55 NodeType.java
+-rw-r--r--. 1 myid  583 Oct  2 23:28 Readme.txt
+-rw-r--r--. 1 myid    0 Oct  2 23:32 rec26899
+-rw-r--r--. 1 myid 3377 Oct  2 23:19 SortedLinkedList.class
+-rw-r--r--. 1 myid 5515 Oct  2 23:21 #SortedLinkedList.java#
+-rw-r--r--. 1 myid 5493 Oct  2 23:19 SortedLinkedList.java
+/home/myid/bds27724/smith_assignment1:/home/myid/csci-2720c

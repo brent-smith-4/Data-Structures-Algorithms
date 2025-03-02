@@ -1,0 +1,22 @@
+smith_assignment4:
+total 208
+-rw-r--r--. 1 myid  2875 Nov 13 14:23 ExpDriver.class
+-rw-r--r--. 1 myid  3333 Nov 13 16:53 ExpDriver.java
+-rw-r--r--. 1 myid   751 Nov 13 12:31 HeapSort.class
+-rw-r--r--. 1 myid  1634 Nov 13 12:31 HeapSort.java
+-rw-r--r--. 1 myid   988 Nov 13 13:03 MergeSort.class
+-rw-r--r--. 1 myid  1673 Nov 13 13:02 MergeSort.java
+-rw-r--r--. 1 myid 48891 Nov  6 22:41 ordered.txt
+-rw-r--r--. 1 myid   809 Nov 13 16:52 QuickSort.class
+-rw-r--r--. 1 myid  2137 Nov 13 16:51 QuickSort.java
+-rw-r--r--. 1 myid   877 Nov 13 16:47 RandomQuickSort.class
+-rw-r--r--. 1 myid  2076 Nov 13 16:47 RandomQuickSort.java
+-rw-r--r--. 1 myid 48891 Nov 13 12:33 random.txt
+-rw-r--r--. 1 myid   401 Nov 13 18:38 README.txt
+-rw-r--r--. 1 myid     0 Nov 13 18:48 rec19705
+-rw-r--r--. 1 myid 48891 Nov 13 12:33 reverse.txt
+-rw-r--r--. 1 myid   537 Nov 13 11:50 SelectionSort.class
+-rw-r--r--. 1 myid   860 Nov 13 11:50 SelectionSort.java
+-rw-r--r--. 1 myid  2400 Nov  6 22:41 SortDriver.class
+-rw-r--r--. 1 myid  4654 Nov 13 16:52 SortDriver.java
+/home/myid/bds27724/csci2720/assignments/smith_assignment4:/home/myid/csci-2720c

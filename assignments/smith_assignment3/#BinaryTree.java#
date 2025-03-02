@@ -1,0 +1,297 @@
+import java.util.*;
+import java.lang.*;
+
+public class BinaryTree<T extends Comparable<T>> {
+    NodeType<T> root;
+
+    public BinaryTree() {
+        root = null;
+    } // constructor
+
+    public void insert(T item) {
+	// new Node to insert
+	NodeType<T> insert = new NodeType<T>();
+	insert.info = item;
+	insert.left = null;
+	insert.right = null;
+	// iterates through tree, prev is the previous node of iterator
+	NodeType<T> current = root;
+        NodeType<T> prev = null;
+
+	/* Iterative take on the insert function for a binary tree.
+	   We loop through our tree comparing item to the values in
+	   the nodes and the going down left or right branch based on
+	   the result. Then once we reach a leaf node, we do a final
+	   comparison between item and the leaf node value and put
+	   item in left child if less or right child if greater.
+	   This means we are never inserting values in between other
+	   values.
+	*/
+        while (current != null) {
+            prev = current;
+            if (item.compareTo(current.info) < 0) {
+                current = current.left;
+	    } else if (item.compareTo(current.info) == 0) {
+		System.out.println("The item already exists in the tree.");
+		return;
+            } else {
+                current = current.right;
+	    } // if-else
+        } // while
+ 
+        // TEST CASE: If the tree is empty
+        if (root == null) {
+            root = insert;
+        // If item is less than node item, make insert it's left child
+        } else if (item.compareTo(prev.info) < 0) {
+            prev.left = insert;
+	// If equal print item already exists
+	} else if (item.compareTo(prev.info) == 0) {
+	     System.out.println("The item already exists in the tree.");
+             return;
+        // Else make insert its right child
+	} else {
+            prev.right = insert;
+	} // if-else
+    } // method
+
+    /* Recursive take on delete item method, could not figure out a simpler
+       way to do this method iteratively. This initial method
+       simply checks if tree is empty. If not, it calls the aux
+       method to do the actual recursion as that one takes a NodeType<T>
+       parameter.       
+     */
+    public void delete(T item) {
+	if (root == null) {
+	    System.out.println("Tree is empty");
+	} else {
+	    NodeType<T> current = root;
+	    deleteRecursion(current, item);
+	} // if-else
+    } // method
+
+    /* Recursively goes through the tree scanning for a match to the
+       item given through input. If it matches, we do 4 different things
+       based on how many children the node being deleted has.
+
+       1.)No children - make node null
+       2.)Left child - make left child into node
+       3.)Right child - make right child into node
+       4.)Both children - find minimum value node on right subtree, and set
+       that as the node
+
+       I was having issues deleting the root node, so I had to adjust my
+       code for that.
+     */
+    public NodeType<T> deleteRecursion(NodeType<T> node, T item) {
+	// TEST CASE: item selected does not exist in tree
+	if (node == null) {
+	    System.out.println("Item is not present in the tree");
+            return null;
+	} // if
+	// Goes through and checks if item is less, greater, or equal to node
+        if (item.compareTo(node.info) < 0) {
+            node.left = deleteRecursion(node.left, item);
+        } else if (item.compareTo(node.info) > 0) {
+            node.right = deleteRecursion(node.right, item);
+        } else if (item.compareTo(node.info) == 0) {
+            if (node.left != null && node.right != null) { // Has both children
+		if (node == root) {
+		    NodeType<T> temp = root;
+		    // Finding minimum node from right subtree
+		    NodeType<T> minRightNode = minRightNode(temp.right);
+		    // Replacing current node with minimum node from right subtree
+		    root.info = minRightNode.info;
+		    // Delete minimum node from right subtree
+		    root.right = deleteRecursion(root.right, minRightNode.info);
+		} else {
+		    NodeType<T> temp = node;
+                    // Finding minimum node from right subtree
+                    NodeType<T> minRightNode = minRightNode(temp.right);
+                    // Replacing current node with minimum node from right subtree
+                    node.info = minRightNode.info;
+                    // Deleting minimum node from right subtree
+                    node.right = deleteRecursion(node.right, minRightNode.info);
+		} // if-else
+            } else if (node.left != null) { // Has left child only
+		if (node == root) {
+		    root = root.left;
+		} else {
+		    node = node.left;
+		} // if-else
+            } else if (node.right != null) { // Has right child only
+                if (node == root) {
+                    root = root.right;
+                } else {
+                    node = node.right;
+                } // if-else
+            } else { // Has no children
+		if (node == root) {
+                    root = null;
+                } else {
+                    node = null;
+                } // if-else
+	    } // if-else
+        } // if-else
+        return node;
+    } // method
+    
+    /* Get minimum node in right subtree that pertains to matched node in recursive run.
+       This is only needed for when we are deleting node that has both children.
+       This finds the left-most node on the right subtree for the node we are deleting.
+       i.e. the smallest node greater than the node being deleted.
+    */
+    public NodeType<T> minRightNode(NodeType<T> node) {
+        if (node.left == null) {
+            return node;
+        } else {
+            return minRightNode(node.left);
+        } // if else
+    } // method
+    
+    public boolean retrieve(T item) {
+	// iterates through tree
+        NodeType<T> iterator = root;
+
+        /* Iterative take on the retrieve function for a binary tree.
+           We loop through our tree comparing item to the values in
+           the nodes and the going down left or right branch based on
+           the result. If we find something equal within, boolean returns
+	   true, else false
+        */
+        while (iterator != null) {
+            if (item.compareTo(iterator.info) < 0) {
+                iterator = iterator.left;
+            } else if (item.compareTo(iterator.info) == 0) {
+                return true;
+            } else {
+                iterator = iterator.right;
+            } // if-else
+        } // while
+	return false;
+    } // method
+
+    // Recursive method: uses auxillary method to do most of work
+    public void inOrder() {
+	NodeType<T> node = root;
+	inOrderRecursion(node);
+    } // method
+
+    /* Runs through tree recursively to print nodes in order.
+       Goes from left to right, bottom to top (generally speaking)
+       I don't know how else to explain inOrder
+     */
+    public void inOrderRecursion(NodeType<T> node) {
+	if (node == null) {
+	    return;
+	} // if
+
+	inOrderRecursion(node.left);
+	System.out.printf("%s ", node.info);
+	inOrderRecursion(node.right);
+    } // method
+
+    // Recursive method: uses auxillary function to do most of work
+    public void getSingleParent() {
+	  NodeType<T> node = root;
+	  getSingleParentRecursion(node);
+    } // method
+
+    // Copy-paste of inOrder method, w/ only printing node if single-child parent
+    public void getSingleParentRecursion(NodeType<T> node) {
+	if (node == null) {
+            return;
+        } // if
+
+        getSingleParentRecursion(node.left);
+	if ((node.left != null && node.right == null) || (node.left == null && node.right != null)) {
+	    System.out.printf("%s ", node.info);
+	} // if
+        getSingleParentRecursion(node.right);
+    } // method
+
+    // Recursive method: auxillary method does most of work
+    public int getNumLeafNodes() {
+          NodeType<T> node = root;
+          return getNumLeafNodesRecursion(node);
+    } // method
+
+    /* Counts leaf nodes, I think I should make all these recursive methods private,
+       but I am strapped for time as I leave for trip thursday and I don't want to risk
+       breaking something that isn't broke.
+     */
+    public int getNumLeafNodesRecursion(NodeType<T> node) {
+	 if (node == null)
+            return 0;
+        if (node.left == null && node.right == null)
+            return 1;
+        else
+            return getNumLeafNodesRecursion(node.left) + getNumLeafNodesRecursion(node.right);
+    } // method
+
+    /* Finally back to the iteratives, basically copy-paste of
+       retrieve code. Instead of returning true or false though,
+       the method calls upon a aux method to do some recursion
+       through the tree to find the cousins of the node given
+       by input.
+     */
+    public void getCousins(T item) {
+	NodeType<T> iterator = root;
+	while (iterator != null) {
+            if (item.compareTo(iterator.info) < 0) {
+                iterator = iterator.left;
+            } else if (item.compareTo(iterator.info) == 0) {
+                int level = getLevel(root, iterator, 1);
+                printGivenLevel(root, iterator, level);
+                return;
+            } else {
+                iterator = iterator.right;
+            } // if-else
+        } // while
+	System.out.println("Item is not present in the tree");
+    } // method
+
+    /* Using recursion, gets us the current level of the node selected
+       by input, and returns it to allow get cousins to use our 2nd
+       recursive method, printGivenLevel, to actually print the cousins
+       of our selected node + level.
+     */
+    public int getLevel(NodeType<T> root, NodeType<T> node, int level) {
+	// BASE CASE: empty tree or node is the root of tree
+	if (root == null)
+	    return 0;
+	if (root == node)
+	    return level;
+
+	// If node is present in left subtree
+	int downlevel = getLevel(root.left, node, level+1);
+	if (downlevel != 0)
+	    return downlevel;
+ 
+	// If node is not present in left subtree
+	return getLevel(root.right, node, level+1);
+    } // method
+
+    /* Goes through recursion to find and print out the cousins of our dear node selected.
+       Since the method knows what level we need to be on to print our cousins, this was
+       pretty simple, just find left and/or right (neither) of the other child of the
+       grandparent and print them out. Grandparent - Grandchild = level difference of 2.
+     */
+    public void printGivenLevel(NodeType<T> root, NodeType<T> node, int level) {
+	// BASE CASE: empty list or level is 1
+	if (root == null || level < 2)
+	    return;
+	if (level == 2) {
+	    if (root.left == node || root.right == node)
+		return;
+	    if (root.left != null)
+		System.out.print(root.left.info + " ");
+	    if (root.right != null)
+		System.out.print(root.right.info + " ");
+	} else if (level > 2) {
+	    printGivenLevel(root.left, node, level-1);
+	    printGivenLevel(root.right, node, level-1);
+	}  // if-else
+    } // method
+    
+} // class

@@ -1,0 +1,192 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+import java.nio.*;
+import java.math.*;
+
+public class LinkedListDriver {
+    
+    public static void main(String[] args) {
+        if (args.length != 1) {
+            System.err.println("No file was input");
+            System.exit(1);
+        } else {
+            try {
+                File file = new File(args[0]);
+		byte[] bytes = new byte[(int) file.length()];
+		FileInputStream fis = new FileInputStream(file);
+		fis.read(bytes);
+		fis.close();
+		if (bytes.length == 0) {
+		    SortedLinkedList el = new SortedLinkedList();
+		    run(el);
+		} else {
+		    String[] valueStr = new String(bytes).trim().split(" ");
+		    int[] items = new int[valueStr.length];
+		    for (int i = 0; i < valueStr.length; i++) { 
+			items[i] = Integer.parseInt(valueStr[i]);
+		    } // for
+
+		    SortedLinkedList ll = new SortedLinkedList();
+		    for (int i = 0; i < items.length; i++) {
+			ItemType temp = new ItemType();
+			temp.initialize(items[i]);
+			ll.insertItem(temp);
+		    } // for
+		    System.out.println();
+		    run(ll);
+		} // if-else
+            } catch (Exception e) {
+                System.err.println();
+                System.err.println("Error with command or list manipulation");
+                System.exit(2);
+            } // try-catch
+        } // if
+
+    } // main
+
+    public static void run(SortedLinkedList ll) throws IOException {
+	boolean quit = false;
+	BufferedReader bi = new BufferedReader(new InputStreamReader(System.in));
+	Scanner keyboard = new Scanner(System.in);
+	char c;
+	int num = 0;
+	
+	System.out.println("Commands:");
+	System.out.println("(i) - Insert Value");
+	System.out.println("(d) - Delete Value");
+	System.out.println("(s) - Search Value");
+        System.out.println("(n) - Print Next Iterator Value");
+        System.out.println("(r) - Reset Iterator");
+	System.out.println("(a) - Delete Alternate Nodes");
+	System.out.println("(m) - Merge Lists");
+	System.out.println("(t) - Find Intersection");
+	System.out.println("(p) - Print List");
+	System.out.println("(l) - Print Length");
+	System.out.println("(q) - Quit Program");
+
+	while (!quit) {
+	    System.out.print("\nEnter a command: ");
+	    c = keyboard.next().charAt(0);
+
+	    if (c == 'i') { // Insert Value
+		System.out.print("Enter a number to insert: ");
+		num = keyboard.nextInt();
+		System.out.print("Original list: ");
+		ll.print();
+		ItemType newItem = new ItemType();
+		newItem.initialize(num);
+		ll.insertItem(newItem);
+		System.out.print("New list: ");
+                ll.print();
+	    } else if (c == 'd') { // Delete Value
+		System.out.print("Enter a number to delete: ");
+                num = keyboard.nextInt();
+                System.out.print("Original list: ");
+		ll.print();
+                ItemType newItem = new ItemType();
+                newItem.initialize(num);
+                ll.deleteItem(newItem);
+                System.out.print("New list: ");
+                ll.print();
+	    } else if (c == 's') { // Search Value
+		System.out.print("Enter a number to search: ");
+                num = keyboard.nextInt();
+                System.out.print("Original list: ");
+		ll.print();
+                ItemType newItem = new ItemType();
+                newItem.initialize(num);
+                int index = ll.searchItem(newItem);
+                if (index == -1)
+		    System.out.println("The list is empty");
+		else if (index == -2)
+		    System.out.println("Item is not present in list");
+		else
+		    System.out.println("The item is present at index " +  index);
+	    } else if (c == 'n') { // Print Next Iterator Value
+		ItemType nextItem = ll.getNextItem();
+		if(nextItem == null) {
+		    System.out.println("List is empty");
+		} else {
+		    System.out.println(nextItem.getValue());
+		} // if-else
+	    } else if (c == 'r') { // Reset Iterator
+		ll.resetList();
+		System.out.println("Iterator is reset");
+	    } else if (c == 'a') { // Delete Alternate Nodes
+		 System.out.print("Original list: ");
+		 ll.print();
+		 ll.deleteAltNode();
+		 System.out.print("New list: ");
+                 ll.print();
+	    } else if (c == 'm') { // Merge Lists
+		System.out.print("Enter the length of the new list: ");
+                num = keyboard.nextInt();
+		System.out.print("Enter the numbers: ");
+		String[] convert = bi.readLine().split(" ");
+		int[] mergeArr = new int[convert.length];
+                for (int i = 0; i < convert.length; i++) {
+		    mergeArr[i] = Integer.parseInt(convert[i]);
+                } // for
+		SortedLinkedList ml = new SortedLinkedList();
+                for (int i = 0; i < mergeArr.length; i++) {
+                    ItemType temp = new ItemType();
+                    temp.initialize(mergeArr[i]);
+                    ml.insertItem(temp);
+                } // for
+		System.out.print("The list 1: ");
+	        ll.print();
+		System.out.print("The list 2: ");
+		ml.print();
+		for (int i = 0; i < mergeArr.length; i++) {
+                    ItemType temp = new ItemType();
+                    temp.initialize(mergeArr[i]);
+                    ll.mergeList(temp);
+                } // for
+		System.out.print("Merged List: ");
+		ll.print();
+	    } else if (c == 't') { // Find Intersection
+		System.out.print("Enter the length of the new list: ");
+                num = keyboard.nextInt();
+                System.out.print("Enter the numbers: ");
+                String[] iStr = bi.readLine().split(" ");
+		int[] iArr = new int[iStr.length];
+                for (int i = 0; i < iStr.length; i++) {
+                    iArr[i] = Integer.parseInt(iStr[i]);
+                } // for
+		SortedLinkedList il = new SortedLinkedList();
+                for (int i = 0; i < iArr.length; i++) {
+                    ItemType temp = new ItemType();
+                    temp.initialize(iArr[i]);
+                    il.insertItem(temp);
+                } // for
+		System.out.print("The list 1: ");
+                ll.print();
+                System.out.print("The list 2: ");
+                il.print();
+		System.out.print("Intersection of lists: ");
+		SortedLinkedList fil = new SortedLinkedList();
+		for (int i = 0; i < iArr.length; i++) {
+		    ItemType temp = new ItemType();
+                    temp.initialize(iArr[i]);
+		    if (ll.findIntersection(temp)) {
+			fil.insertItem(temp);
+		    } // if
+		} // for
+		fil.print();
+	    } else if (c == 'p') { // Print List
+		System.out.print("The list is: ");
+		ll.print();
+	    } else if (c == 'l') { // Print Length
+		System.out.println("The length of the list is " + ll.getLength());
+	    } else if (c == 'q') { // Quit Program
+		System.out.println("Exiting the program...");
+		quit = true;
+		System.exit(1);
+	    } else { // Error Message For Invalid Command
+		System.out.println("Invalid command, try again!");
+	    } // if-else
+	} // while
+    } // method
+    
+} // class

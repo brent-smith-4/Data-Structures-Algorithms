@@ -1,0 +1,14 @@
+smith_assignment3:
+total 64
+-rw-r--r--. 1 myid  4267 Oct 25 22:07 BinaryTree.class
+-rw-r--r--. 1 myid  4451 Oct 25 15:10 BinaryTreeDriver.class
+-rw-r--r--. 1 myid  9822 Oct 25 22:07 BinaryTreeDriver.java
+-rw-r--r--. 1 myid 10757 Oct 25 22:58 BinaryTree.java
+-rw-r--r--. 1 myid    38 Oct 25 16:53 double-input.txt
+-rw-r--r--. 1 myid    29 Oct 25 16:52 int-input.txt
+-rw-r--r--. 1 myid   395 Oct 25 14:51 NodeType.class
+-rw-r--r--. 1 myid   140 Oct 24 21:16 NodeType.java
+-rw-r--r--. 1 myid   517 Oct 26 00:04 README.txt
+-rw-r--r--. 1 myid     0 Oct 26 00:06 rec20767
+-rw-r--r--. 1 myid    32 Oct 25 16:53 string-input.txt
+/home/myid/bds27724/csci2720/assignments/smith_assignment3:/home/myid/csci-2720c
