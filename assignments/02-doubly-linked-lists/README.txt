@@ -1,4 +1,4 @@
-File compiles & runs with standard command given with assignment, assuming you are in smith_assignment2 directory:
+File compiles & runs with standard command given with assignment, assuming you are in 02-doubly-linked-lists directory:
 $ javac NodeType.java
 $ javac DoublyLinkedList.java
 $ javac DoublyLinkedListDriver.java
