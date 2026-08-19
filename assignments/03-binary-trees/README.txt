@@ -1,4 +1,4 @@
-Program runs with this command, assuming you are in the smith_assignment3 folder:
+Program runs with this command, assuming you are in the 03-binary-trees folder:
 
 $ java BinaryTreeDriver.java <input file name>
 
