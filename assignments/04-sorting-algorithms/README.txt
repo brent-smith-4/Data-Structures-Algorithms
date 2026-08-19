@@ -1,5 +1,5 @@
 All programs should be compiled already.
-Program runs with this command, assuming you are in the smith_assignment4 folder:
+Program runs with this command, assuming you are in the 04-sorting-algorithms folder:
 
 Experiment 1:
 $ java SortDriver.java <input file name>
